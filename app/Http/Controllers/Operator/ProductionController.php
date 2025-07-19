@@ -33,6 +33,8 @@ class ProductionController extends Controller
             'input_lots.*.qty_used' => 'required|numeric|min:0.01',
             'output.item_id' => 'required|exists:items,id',
             'output.qty_output' => 'required|numeric|min:0.01',
+            'note' => 'nullable|string|max:255',
+
         ]);
 
         DB::transaction(function () use ($request) {
@@ -58,16 +60,21 @@ class ProductionController extends Controller
                     'qty_used' => $input['qty_used'],
                 ]);
             }
+            
+            
 
             // Output (buat lot baru)
             $item = Item::findOrFail($request->output['item_id']);
+            $existingCount = Lot::where('item_id', $item->id)->count();
+            $code = 'LOT-' . $item->code . '-' . str_pad($existingCount + 1, 3, '0', STR_PAD_LEFT);
             $newLot = Lot::create([
-                'code' => 'LOT-' . $item->code,
+                'code' => $code,
                 'item_id' => $item->id,
                 'uom_id' => $item->uom_id,
                 'qty_awal' => $request->output['qty_output'],
                 'qty_sisa' => $request->output['qty_output'],
                 'created_by' => auth()->id(),
+                
             ]);
 
             ProductionOutput::create([
@@ -81,13 +88,13 @@ class ProductionController extends Controller
     }
 
     public function riwayat()
-{
-    $productions = Production::with('workCenter', 'outputs.lot.item')
-        ->where('user_id', auth()->id())
-        ->orderByDesc('production_date')
-        ->get();
+    {
+        $productions = Production::with('workCenter', 'outputs.lot.item')
+            ->where('user_id', auth()->id())
+            ->orderByDesc('production_date')
+            ->get();
 
-    return view('operator.produksi.riwayat', compact('productions'));
-}
+        return view('operator.produksi.riwayat', compact('productions'));
+    }
 
     }

@@ -72,11 +72,16 @@
         <label>Qty Hasil</label>
         <input type="number" name="output[qty_output]" step="0.01" class="form-control" required>
     </div>
+    <div class="mb-3">
+    <label for="note">Catatan</label>
+    <textarea name="note" id="note" class="form-control" rows="3" placeholder="Masukkan catatan produksi (opsional)">{{ old('note') }}</textarea>
+    </div>
+
 
     <button class="btn btn-primary">Simpan Produksi</button>
 </form>
 
-{{-- JS untuk tambah/hapus baris input lot --}}
+
 <script>
     let index = 1;
 

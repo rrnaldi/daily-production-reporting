@@ -23,7 +23,7 @@
         <tr>
             <td>{{ $input->lot->code }}</td>
             <td>{{ $input->lot->item->name }}</td>
-            <td>{{ $input->qty_used }}</td>
+            <td>{{ number_format($input->qty_used, 0) }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -43,7 +43,7 @@
         <tr>
             <td>{{ $output->lot->code }}</td>
             <td>{{ $output->lot->item->name }}</td>
-            <td>{{ $output->qty_output }}</td>
+            <td>{{ number_format($output->qty_output, 0) }}</td>
         </tr>
         @endforeach
     </tbody>

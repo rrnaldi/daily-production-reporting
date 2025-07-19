@@ -1,0 +1,30 @@
+
+        .login-card {
+            min-height: 400px;
+        }
+
+        .left-panel {
+            background-color: #0d6efd;
+            color: white;
+            padding: 40px;
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-panel {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .left-panel {
+                border-radius: 0.5rem 0.5rem 0 0;
+                text-align: center;
+            }
+        }
+    

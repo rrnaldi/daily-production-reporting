@@ -91,8 +91,17 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
+        $dipakaiDiLot = $item->lots()->exists();
+        $dipakaiSebagaiInput = $item->productionInputs()->exists();
+        $dipakaiSebagaiOutput = $item->productionOutputs()->exists();
+
+        if ($dipakaiDiLot || $dipakaiSebagaiInput || $dipakaiSebagaiOutput) {
+            return redirect()->route('items.index')->with('error', 'Item tidak bisa dihapus karena sudah digunakan dalam data produksi atau lot.');
+        }
+
         $item->delete();
 
         return redirect()->route('items.index')->with('success', 'Item berhasil dihapus.');
     }
+
 }

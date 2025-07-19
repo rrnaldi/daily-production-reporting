@@ -1,4 +1,4 @@
-<div class="sidebar bg-primary text-white vh-100 p-3" style="width: 260px; box-shadow: 2px 0 10px rgba(0,0,0,0.1);">
+<div class="sidebar bg-primary text-white min-vh-100 p-3" style="width: 260px; box-shadow: 2px 0 10px rgba(0,0,0,0.1);">
     <div class="sidebar-header mb-4 d-flex align-items-center">
         <h4 class="m-0">
             <i class="fas fa-bars me-2"></i> Menu

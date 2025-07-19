@@ -3,14 +3,22 @@
 <head>
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 </head>
 <body class="bg-light">
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            <div class="card shadow">
-                <div class="card-header text-center bg-primary text-white">Login</div>
-                <div class="card-body">
+        <div class="col-md-8">
+            <div class="card shadow d-flex flex-md-row flex-column login-card">
+                <div class="col-md-6 left-panel">
+                    <div>
+                        <h2 class="fw-bold">Selamat Datang</h2>
+                        <p class="mt-3">di Aplikasi <strong>Daily Production Reporting</strong></p>
+                    </div>
+                </div>
+                <div class="col-md-6 right-panel">
+                    <h4 class="text-center mb-4 fw-semibold">Login</h4>
+
                     @if ($errors->has('login_error'))
                         <div class="alert alert-danger">{{ $errors->first('login_error') }}</div>
                     @endif

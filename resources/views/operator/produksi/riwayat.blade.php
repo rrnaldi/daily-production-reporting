@@ -14,6 +14,7 @@
                 <th>Work Center</th>
                 <th>Item Output</th>
                 <th>Qty Output</th>
+                <th>Note</th>
             </tr>
         </thead>
         <tbody>
@@ -23,13 +24,20 @@
                     <td>{{ $prod->workCenter->name }}</td>
                     <td>
                         @foreach($prod->outputs as $out)
-                            {{ $out->lot->item->code }} - {{ $out->lot->item->name }}<br>
+                            {{ $out->lot->code }}</strong> 
                         @endforeach
                     </td>
                     <td>
                         @foreach($prod->outputs as $out)
-                            {{ $out->qty_output }} {{ $out->lot->item->uom->name ?? '' }}<br>
+                            {{ number_format($out->qty_output, 0) }} {{ $out->lot->item->uom->name ?? '' }}<br>
                         @endforeach
+                    </td>
+                    <td>
+                        @if($prod->note)
+                        {{ $prod->note }}
+                        @else
+                            -
+                        @endif
                     </td>
                 </tr>
             @endforeach

@@ -83,13 +83,12 @@ class LotController extends Controller
 
     public function destroy(Lot $lot)
 {
-    if ($lot->qty_awal != $lot->qty_sisa) {
-        return redirect()->route('supervisor.lots.index')->withErrors('Lot sudah digunakan, tidak bisa dihapus.');
+    try {
+        $lot->delete();
+        return redirect()->route('supervisor.lots.index')->with('success', 'Lot berhasil dihapus.');
+    } catch (\Illuminate\Database\QueryException $e) {
+        return redirect()->route('supervisor.lots.index')->with('error', 'Lot tidak bisa dihapus karena sudah digunakan dalam produksi.');
     }
-
-    $lot->delete();
-
-    return redirect()->route('supervisor.lots.index')->with('success', 'Lot berhasil dihapus.');
 }
 
 }

@@ -12,4 +12,20 @@ class Item extends Model
     {
         return $this->belongsTo(Uom::class);
     }
+
+    public function lots()
+    {
+        return $this->hasMany(Lot::class);
+    }
+
+    public function productionInputs()
+    {
+        return $this->hasManyThrough(ProductionInput::class, Lot::class);
+    }
+
+    public function productionOutputs()
+    {
+        return $this->hasManyThrough(ProductionOutput::class, Lot::class);
+    }
+
 }

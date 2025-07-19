@@ -4,9 +4,18 @@
     <h2>Data Item</h2>
     <a href="{{ route('items.create') }}" class="btn btn-primary mb-3">+ Tambah Item</a>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
     @endif
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
 
     <form action="{{ route('items.index') }}" method="GET" class="mb-4 d-flex align-items-center gap-2">
     <input type="text" name="search" value="{{ request('search') }}"
@@ -41,10 +50,12 @@
                     <td>{{ $item->uom->name ?? '-' }}</td>
                     <td>
                         <a href="{{ route('items.edit', $item) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('items.destroy', $item) }}" method="POST" style="display:inline-block">
-                            @csrf @method('DELETE')
-                            <button onclick="return confirm('Hapus data?')" class="btn btn-sm btn-danger">Hapus</button>
+                        <form action="{{ route('items.destroy', $item) }}" method="POST" style="display:inline-block" onsubmit="return confirm('Yakin hapus item ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-danger">Hapus</button>
                         </form>
+
                     </td>
                 </tr>
             @endforeach
